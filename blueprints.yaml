@@ -12,7 +12,7 @@ demo: http://demo.yoursite.com
 keywords: grav, plugin, etc
 bugs: https://github.com/NicoHood/grav-plugin-todo/issues
 docs: https://github.com/NicoHood/grav-plugin-todo/blob/develop/README.md
-license: MIT
+license: GPL3
 
 dependencies:
   - { name: grav, version: '>=1.6.0' }
