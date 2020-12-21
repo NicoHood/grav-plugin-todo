@@ -3,6 +3,7 @@ namespace Grav\Plugin;
 
 use Composer\Autoload\ClassLoader;
 use Grav\Common\Plugin;
+use RocketTheme\Toolbox\Event\Event;
 
 /**
  * Class TodoPlugin
@@ -10,6 +11,8 @@ use Grav\Common\Plugin;
  */
 class TodoPlugin extends Plugin
 {
+    protected $route = 'todo';
+
     /**
      * @return array
      *
@@ -45,8 +48,21 @@ class TodoPlugin extends Plugin
      */
     public function onPluginsInitialized(): void
     {
+        /** @var Uri $uri */
+        $uri = $this->grav['uri'];
+
         // Don't proceed if we are in the admin plugin
         if ($this->isAdmin()) {
+            $this->enable([
+                'onTwigTemplatePaths' => ['onTwigAdminTemplatePaths', 0],
+                'onAdminMenu' => ['onAdminMenu', 0],
+                'onGetPageBlueprints' => ['onGetPageBlueprints', 0],
+                'onGetPageTemplates' => ['onGetPageTemplates', 0],
+            ]);
+
+            if (strpos($uri->path(), $this->config->get('plugins.admin.route') . '/' . $this->route) === false) {
+                return;
+            }
             return;
         }
 
@@ -54,5 +70,39 @@ class TodoPlugin extends Plugin
         $this->enable([
             // Put your main events here
         ]);
+    }
+
+    /**
+     * Add plugin templates path
+     */
+    public function onTwigAdminTemplatePaths()
+    {
+        $this->grav['twig']->twig_paths[] = __DIR__ . '/admin/templates';
+    }
+
+    /**
+     * Add navigation item to the admin plugin
+     */
+    public function onAdminMenu()
+    {
+        $this->grav['twig']->plugins_hooked_nav['TODO'] = ['route' => $this->route, 'icon' => 'fa-file-text'];
+    }
+
+    /**
+     * Add blueprint directory.
+     */
+    public function onGetPageBlueprints(Event $event): void
+    {
+        $types = $event->types;
+        $types->scanBlueprints('plugin://' . $this->name . '/blueprints');
+    }
+
+    /**
+     * Add templates directory.
+     */
+    public function onGetPageTemplates(Event $event): void
+    {
+        $types = $event->types;
+        $types->scanTemplates('plugin://' . $this->name . '/templates');
     }
 }
