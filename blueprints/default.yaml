@@ -1,0 +1,16 @@
+extends@: parent@
+
+form:
+  fields:
+    tabs:
+      fields:
+        options:
+          fields:
+            todo:
+              type: section
+              title: TODO
+              underline: true
+
+              import@:
+                type: 'partials/todo'
+                context: blueprints://

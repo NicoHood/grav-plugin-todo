@@ -1,0 +1,21 @@
+form:
+  fields:
+    header.todo.text:
+      type: textarea
+      label: Note
+      toggleable: true
+    header.todo.priority:
+      type: select
+      label: Priority
+      toggleable: true
+      options:
+        0: 'No Priority'
+        1: 'Very low'
+        2: 'Low'
+        3: 'Medium'
+        4: 'High'
+        5: 'Critical'
+    header.todo.duedate:
+      type: date
+      label: Due Date
+      toggleable: true
