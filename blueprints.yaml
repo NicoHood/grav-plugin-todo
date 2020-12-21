@@ -2,14 +2,13 @@ name: Todo
 slug: todo
 type: plugin
 version: 0.1.0
-description: A plugin to manage todo tasks acress pages
+description: A plugin to manage todo tasks across pages
 icon: plug
 author:
   name: NicoHood
   email: grav@nicohood.de
 homepage: https://github.com/NicoHood/grav-plugin-todo
-demo: http://demo.yoursite.com
-keywords: grav, plugin, etc
+keywords: grav, plugin, todo, list, priority, 'due date', manage, organize, page
 bugs: https://github.com/NicoHood/grav-plugin-todo/issues
 docs: https://github.com/NicoHood/grav-plugin-todo/blob/develop/README.md
 license: GPL3
@@ -30,7 +29,3 @@ form:
         0: PLUGIN_ADMIN.DISABLED
       validate:
         type: bool
-    text_var:
-      type: text
-      label: PLUGIN_TODO.TEXT_VARIABLE
-      help: PLUGIN_TODO.TEXT_VARIABLE_HELP

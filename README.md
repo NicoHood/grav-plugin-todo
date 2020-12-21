@@ -2,7 +2,7 @@
 
 **This README.md file should be modified to describe the features, installation, configuration, and general usage of the plugin.**
 
-The **Todo** Plugin is an extension for [Grav CMS](http://github.com/getgrav/grav). A plugin to manage todo tasks acress pages
+The **Todo** Plugin is an extension for [Grav CMS](http://github.com/getgrav/grav). A plugin to manage todo tasks across pages
 
 ## Installation
 
@@ -23,7 +23,7 @@ To install the plugin manually, download the zip-version of this repository and 
 You should now have all the plugin files under
 
     /your/site/grav/user/plugins/todo
-	
+
 > NOTE: This plugin is a modular component for Grav which may require other plugins to operate, please see its [blueprints.yaml-file on GitHub](https://github.com/nico-hood/grav-plugin-todo/blob/master/blueprints.yaml).
 
 ### Admin Plugin
