@@ -1,0 +1,79 @@
+{% extends 'partials/base.html.twig' %}
+
+{% if admin.route %}
+    {% set context = admin.page(true) %}
+{% endif %}
+
+{% block titlebar %}
+    <h1><i class="fa fa-fw fa-check"></i> {{ "PLUGIN_TODO.TODO_HEADLINE"|t }}</h1>
+{% endblock %}
+
+{% block content %}
+    <style>
+      tr {
+        border-bottom: 1px solid #f7f7f7;
+      }
+
+      th { background: #d9d9d9; }
+
+      td, th {
+          border: 0;
+      }
+
+      /* Table layout */
+      .priority { flex: 7 }
+      .page { flex: 25 }
+      .todo { flex: 50 }
+      .due-date { flex: 15 }
+      .edit { flex: 3 }
+
+      .center {
+          margin: 0 auto;
+          text-align: center;
+          display: block;
+      }
+    </style>
+
+    <h1>{{ "PLUGIN_TODO.TODO_TABLE_HEADLINE"|t }}</h1>
+
+    {% set collection = page.collection %}
+    {% set filtered_collection = collection|filter(x => x.header.todo) %}
+    {# TODO pagination does not yet work #}
+    {# {% do paginate( filtered_collection, 5 ) %} #}
+
+    <div class="admin-block">
+      <table>
+        <tbody>
+          <tr>
+            <th class="priority">Priority</th>
+            <th class="page">Page</th>
+            <th class="todo">TODO</th>
+            <th class="due-date">Due Date</th>
+            <th class="edit"><i class="fa fa-edit"></i></th>
+          </tr>
+
+          {% for page in filtered_collection %}
+            <tr>
+              <td class="priority">{{page.header.todo.priority|default(0)}}</td>
+              <td class="page hint--top" data-hint="{{ page.route }}">{{page.title}}</td>
+              <td class="todo">{{page.header.todo.text}}</td>
+              <td class="due-date">
+                {% if page.header.todo.duedate %}
+                  <strong>Due</strong>: {{ page.header.todo.duedate|date }}
+                {% endif %}
+              </td>
+              <td class="edit"><a href="/admin/pages{{ page.route }}"><i class="fa fa-edit"></i></a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {# TODO Render the pagination list #}
+      {# {% if config.plugins.pagination.enabled and collection.params.pagination %}
+          {% include 'partials/pagination.html.twig' with {'base_url':page.url, 'pagination':collection.params.pagination} %}
+      {% endif %} #}
+
+      <p class="center">Showing <span class="totalRetrieved">{{ filtered_collection|length }}</span> TODOs of <span class="totalAvailable">{{collection|length}} Pages</span></p>
+    </div>
+
+{% endblock %}
