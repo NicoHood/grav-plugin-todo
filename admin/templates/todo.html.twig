@@ -8,7 +8,8 @@
     <h1><i class="fa fa-fw fa-check"></i> {{ "PLUGIN_TODO.TODO_HEADLINE"|t }}</h1>
 {% endblock %}
 
-{% block content %}
+{% block stylesheets %}
+    {{ parent() }}
     <style>
       tr {
         border-bottom: 1px solid #f7f7f7;
@@ -33,7 +34,9 @@
           display: block;
       }
     </style>
+{% endblock %}
 
+{% block content %}
     <h1>{{ "PLUGIN_TODO.TODO_TABLE_HEADLINE"|t }}</h1>
 
     {% set collection = page.collection %}
