@@ -3,7 +3,7 @@ slug: todo
 type: plugin
 version: 0.1.0
 description: A plugin to manage todo tasks across pages
-icon: plug
+icon: check
 author:
   name: NicoHood
   email: grav@nicohood.de
