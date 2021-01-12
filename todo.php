@@ -71,6 +71,10 @@ class TodoPlugin extends Plugin
             if (strpos($uri->path(), $this->config->get('plugins.admin.route') . '/' . $this->route) === false) {
                 return;
             }
+
+            // NOTE: This is required for grav 1.7
+            $this->grav['admin']->enablePages();
+
             return;
         }
 
